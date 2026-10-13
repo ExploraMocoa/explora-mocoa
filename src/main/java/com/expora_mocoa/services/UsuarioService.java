@@ -19,7 +19,7 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioService(UsuarioRepository repository, RolRepository rolRepository,
-                          PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.rolRepository = rolRepository;
         this.passwordEncoder = passwordEncoder;

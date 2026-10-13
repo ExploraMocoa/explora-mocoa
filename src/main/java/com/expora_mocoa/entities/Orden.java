@@ -24,7 +24,7 @@ public class Orden {
 
     @Size(max = 50, message = "El estado no puede superar 50 caracteres")
     @Pattern(regexp = "PENDIENTE|CONFIRMADA|PREPARACION|ENTREGADA|CANCELADA",
-             message = "Estado inválido. Permitidos: PENDIENTE, CONFIRMADA, PREPARACION, ENTREGADA, CANCELADA")
+            message = "Estado inválido. Permitidos: PENDIENTE, CONFIRMADA, PREPARACION, ENTREGADA, CANCELADA")
     @Column(name = "estado", length = 50)
     private String estado = "PENDIENTE";
 
