@@ -20,8 +20,8 @@ public class LugarTuristicoService {
     private final UsuarioRepository usuarioRepository;
 
     public LugarTuristicoService(LugarTuristicoRepository repository,
-                                 CategoriaRepository categoriaRepository,
-                                 UsuarioRepository usuarioRepository) {
+            CategoriaRepository categoriaRepository,
+            UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.categoriaRepository = categoriaRepository;
         this.usuarioRepository = usuarioRepository;

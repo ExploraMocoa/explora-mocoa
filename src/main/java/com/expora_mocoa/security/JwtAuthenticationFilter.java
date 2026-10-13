@@ -4,7 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,11 +34,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final CustomUserDetailsService userDetailsService;
 
     public JwtAuthenticationFilter(JwtService jwtService,
-                                   CustomUserDetailsService userDetailsService) {
-        this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
-    }
-
+        CustomUserDetailsService userDetailsService) {
+            this.jwtService = jwtService;
+            this.userDetailsService = userDetailsService;
+        }
+        
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -69,11 +69,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
-       } catch (Exception ex) {
-    System.err.println(">>> ERROR EN EL FILTRO JWT <<<");
-    ex.printStackTrace(); // Esto mostrará el fallo exacto en tu consola
-    SecurityContextHolder.clearContext();
-}
+        } catch (Exception ex) {
+            System.err.println(">>> ERROR EN EL FILTRO JWT <<<");
+            ex.printStackTrace(); // Esto mostrará el fallo exacto en tu consola
+            SecurityContextHolder.clearContext();
+        }
 
         filterChain.doFilter(request, response);
     }

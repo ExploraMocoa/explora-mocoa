@@ -39,11 +39,11 @@ public class AuthController {
     private final JwtService jwtService;
 
     public AuthController(AuthenticationManager authenticationManager,
-                          CustomUserDetailsService userDetailsService,
-                          UsuarioRepository usuarioRepository,
-                          RolRepository rolRepository,
-                          PasswordEncoder passwordEncoder,
-                          JwtService jwtService) {
+            CustomUserDetailsService userDetailsService,
+            UsuarioRepository usuarioRepository,
+            RolRepository rolRepository,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.usuarioRepository = usuarioRepository;

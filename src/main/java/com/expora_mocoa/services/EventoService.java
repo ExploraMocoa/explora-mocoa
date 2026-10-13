@@ -20,8 +20,8 @@ public class EventoService {
     private final UsuarioRepository usuarioRepository;
 
     public EventoService(EventoRepository repository,
-                         LugarTuristicoRepository lugarRepository,
-                         UsuarioRepository usuarioRepository) {
+            LugarTuristicoRepository lugarRepository,
+            UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.lugarRepository = lugarRepository;
         this.usuarioRepository = usuarioRepository;

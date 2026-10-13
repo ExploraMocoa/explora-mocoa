@@ -21,8 +21,8 @@ public class ResenaService {
     private final LugarTuristicoRepository lugarRepository;
 
     public ResenaService(ResenaRepository repository,
-                         UsuarioRepository usuarioRepository,
-                         LugarTuristicoRepository lugarRepository) {
+            UsuarioRepository usuarioRepository,
+            LugarTuristicoRepository lugarRepository) {
         this.repository = repository;
         this.usuarioRepository = usuarioRepository;
         this.lugarRepository = lugarRepository;
