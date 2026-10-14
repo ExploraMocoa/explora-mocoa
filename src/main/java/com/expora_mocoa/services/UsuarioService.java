@@ -82,6 +82,11 @@ public class UsuarioService {
         if (idActual == null && (u.getContrasena() == null || u.getContrasena().isBlank())) {
             throw new IllegalArgumentException("La contraseña es obligatoria");
         }
+        // VALIDAR QUE VENGA EL ROL AL CREAR
+        if (idActual == null && (u.getRol() == null || u.getRol().getId() == null)) {
+            throw new IllegalArgumentException("El rol es obligatorio");
+        }
+
         repository.findByCorreo(u.getCorreo().trim()).ifPresent(existente -> {
             if (idActual == null || !existente.getId().equals(idActual)) {
                 throw new IllegalArgumentException("El correo ya está registrado");
@@ -99,7 +104,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con id " + rolId));
     }
 
-    
+
     private String encriptarSiEsNecesario(String contrasena) {
         if (contrasena.startsWith("$2a$") || contrasena.startsWith("$2b$") || contrasena.startsWith("$2y$")) {
             return contrasena;
