@@ -85,7 +85,7 @@ public class OrdenService {
         BigDecimal total = orden.getItems() == null ? BigDecimal.ZERO :
                 orden.getItems().stream()
                         .map(i -> i.getPrecioUnitario().multiply(BigDecimal.valueOf(i.getCantidad())))
-                        .reduce(BigDecimal.ZERO, BigDecimal::add);
+                        .reduce(BigDecimal.ZERO, (acumulado, valor) -> acumulado.add(valor));
         orden.setTotal(total);
         return repository.save(orden);
     }

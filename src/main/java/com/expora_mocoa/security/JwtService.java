@@ -12,6 +12,7 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 /**
@@ -42,7 +43,7 @@ public class JwtService {
         // Guardamos la autoridad principal como claim "rol" (ej. "ROLE_ADMIN")
         String rol = userDetails.getAuthorities().stream()
                 .findFirst()
-                .map(Object::toString)
+                .map(authority -> authority.getAuthority())
                 .orElse("ROLE_TURISTA");
         claims.put("rol", rol);
         return buildToken(claims, userDetails.getUsername());
@@ -62,12 +63,12 @@ public class JwtService {
 
     /** Extrae el correo (subject) desde el token. */
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token, claims -> Objects.requireNonNull(claims.getSubject(), "El token no contiene subject"));
     }
 
     /** Extrae el rol guardado en el claim "rol". */
     public String extractRol(String token) {
-        return extractClaim(token, claims -> claims.get("rol", String.class));
+        return extractClaim(token, claims -> { String rol = claims.get("rol", String.class); return rol == null ? "ROLE_TURISTA" : rol; });
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> resolver) {
@@ -90,6 +91,6 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        return extractClaim(token, Claims::getExpiration).before(new Date());
+        Date fechaExpiracion = extractClaim(token, claims -> Objects.requireNonNull(claims.getExpiration(), "El token no contiene fecha de expiración")); return !fechaExpiracion.after(new Date());
     }
 }
