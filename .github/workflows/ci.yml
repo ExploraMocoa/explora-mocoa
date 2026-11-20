@@ -1,0 +1,28 @@
+name: CI - Pruebas Explora Mocoa
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Dar permiso al mvnw
+        run: chmod +x mvnw
+
+      - name: Compilar y correr todas las pruebas
+        run: ./mvnw -B clean verify
